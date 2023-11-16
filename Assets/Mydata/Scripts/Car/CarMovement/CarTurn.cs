@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CarTurn : MyMonoBehavior
 {
-    protected float rotateSpeed = 15f;
+    protected float rotateSpeed = 17f;
     protected float setRos;
     [SerializeField] protected CarController controller;
 
