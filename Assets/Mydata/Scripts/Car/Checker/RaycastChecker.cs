@@ -27,10 +27,17 @@ public class RaycastChecker : MyMonoBehavior
 
         float maxRaycastDistance = 2f;
 
-        if (Physics.Raycast(ray, out hit, maxRaycastDistance) && hit.collider.gameObject.CompareTag("Car"))
+        if (Physics.Raycast(ray, out hit, maxRaycastDistance) )
         {
-            controller.CarMoving.isBackMove = true;
-            controller.CheckTouchForMovement.isTouch = false;
+            if (hit.collider.gameObject.CompareTag("Car"))
+            {
+                controller.CarMoving.isBackMove = true;
+                controller.CheckTouchForMovement.isTouch = false;
+            }
+            if (hit.collider.gameObject.CompareTag("Human"))
+            {
+                Time.timeScale = 0.0f;
+            }
         }
     }
 }
