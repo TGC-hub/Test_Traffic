@@ -11,7 +11,6 @@ public class CarTurnLeft : CarTurn
             {
                 SetRotate(-90);
                 isChange = false;
-                Debug.Log("OK MAN");
             }
         }
         else
@@ -20,7 +19,6 @@ public class CarTurnLeft : CarTurn
             {
                 SetRotate(90);
                 isChange = true;
-                Debug.Log("OK MAN BACK");
             }
         }
     }

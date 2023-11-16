@@ -21,14 +21,12 @@ public class CarTurnAroundLeft : CarTurn
                 SetRotate(-90);
                 isChange = false;
                 StartCoroutine(SetTurnValue());
-                Debug.Log("OK MAN");
             }
 
             if (other.gameObject.CompareTag("Right") && turnValue == 1)
             {
                 SetRotate(-90);
                 turnValue = 0;
-                Debug.Log("OK MAN");
             }
         }
         else
@@ -38,14 +36,12 @@ public class CarTurnAroundLeft : CarTurn
                 SetRotate(90);
                 isChange = true;
                 StartCoroutine(SetTurnValue());
-                Debug.Log("OK MAN");
             }
 
             if (other.gameObject.CompareTag("Left") && turnValue == 1)
             {
                 SetRotate(90);
                 turnValue = 0;
-                Debug.Log("OK MAN BACK");
             }
         }
     }
