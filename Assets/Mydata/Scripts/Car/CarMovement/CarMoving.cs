@@ -5,11 +5,13 @@ public class CarMoving : MyMonoBehavior
     [SerializeField] protected float moveSpeed = 7.0f;
     public float MoveSpeed => moveSpeed;
 
-    protected CarController controller;
+    [SerializeField] protected CarController controller;
 
     protected Vector3 startCarPos;
 
     public bool isBackMove = false;
+
+    public float distancePointStart;
 
     protected override void Start()
     {
@@ -39,8 +41,8 @@ public class CarMoving : MyMonoBehavior
 
     protected virtual void DistanceCar()
     {
-        float distance = Vector3.Distance(startCarPos, transform.position);
-        if(distance < 1f) { isBackMove = false;}
+        distancePointStart = Vector3.Distance(startCarPos, transform.position);
+        if(distancePointStart < 1f) { isBackMove = false;}
     }
 
     protected virtual void Moving()
@@ -58,14 +60,4 @@ public class CarMoving : MyMonoBehavior
         transform.Translate(Vector3.back * moveSpeed * Time.fixedDeltaTime);
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Human"))
-        {
-            isBackMove = true;
-            controller.CheckTouchForMovement.isTouch = false;
-        }
-    }
-
-    
 }

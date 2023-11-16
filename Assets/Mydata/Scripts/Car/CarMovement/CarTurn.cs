@@ -1,28 +1,44 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CarTurn : CheckTrafficPoint
+public class CarTurn : MyMonoBehavior
 {
-    protected float rotateSpeed = 7.0f;
-    [SerializeField] protected float rotateY;
-    [SerializeField] protected float reRotateY;
+    protected float rotateSpeed = 15f;
+    protected float setRos;
+    [SerializeField] protected CarController controller;
 
-    protected virtual void SetRotate(float rotate)
+    protected override void Start()
     {
-        Quaternion targetRotation = Quaternion.Euler(0f, rotate, 0f);
+        base.Start();
+        setRos = transform.eulerAngles.y;
+    }
+    protected override void LoadComponents()
+    {
+        base.LoadComponents();
+        LoadCarCtrl();
+    }
+
+    protected virtual void LoadCarCtrl()
+    {
+        if (this.controller != null) { return; }
+        else
+        {
+            this.controller = GetComponent<CarController>();
+        }
+    }
+
+    protected virtual void SetRotate(int rotate)
+    {
+        setRos = transform.eulerAngles.y + rotate;
+    }
+
+    protected virtual void QuaternionY()
+    {
+        Quaternion targetRotation = Quaternion.Euler(0f, setRos, 0f);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotateSpeed * Time.fixedDeltaTime);
     }
 
     protected virtual void FixedUpdate()
     {
-        if (isTurn == true)
-        {
-            SetRotate(rotateY);
-        }
-        if(isReturn ==  true)
-        {
-            SetRotate(reRotateY);
-        }
+        QuaternionY();
     }
 }

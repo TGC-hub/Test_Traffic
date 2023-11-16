@@ -1,17 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
 
-public class CheckTrafficPoint : MyMonoBehavior
+public class RaycastChecker : MyMonoBehavior
 {
-    [SerializeField] public bool isTurn = false;
-
-    [SerializeField] public bool isReturn = false;
-    [SerializeField] protected string nameTrafficPoint;
-
     [SerializeField] protected CarController controller;
-
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -26,14 +19,18 @@ public class CheckTrafficPoint : MyMonoBehavior
             this.controller = GetComponentInParent<CarController>();
         }
     }
-
-    private void OnTriggerEnter(Collider other)
+    private void FixedUpdate()
     {
-        if (other.gameObject.CompareTag(nameTrafficPoint))
+        Ray ray = new Ray(transform.position, transform.forward);
+
+        RaycastHit hit;
+
+        float maxRaycastDistance = 2f;
+
+        if (Physics.Raycast(ray, out hit, maxRaycastDistance) && hit.collider.gameObject.layer == LayerMask.NameToLayer("Car"))
         {
-            if(controller.CarMoving.isBackMove == true) { isReturn = true; isTurn = false; }
-            else { isTurn = true; isReturn = false;  }
+            controller.CarMoving.isBackMove = true;
+            controller.CheckTouchForMovement.isTouch = false;
         }
     }
-
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CarController : MyMonoBehavior
@@ -10,24 +8,11 @@ public class CarController : MyMonoBehavior
     [SerializeField] protected CheckTouchForMovement checkTouchForMovement;
     public CheckTouchForMovement CheckTouchForMovement => checkTouchForMovement;
 
-    [SerializeField] protected CheckTrafficPoint checkTraffic;
-    public CheckTrafficPoint CheckTraffic => checkTraffic;
-
     protected override void LoadComponents()
     {
         base.LoadComponents();
         LoadCarMoving();
         LoadCheckTouch();
-        LoadCheckTraffic();
-    }
-
-    protected virtual void LoadCheckTraffic()
-    {
-        if (this.checkTraffic != null) { return; }
-        else
-        {
-            this.checkTraffic = GetComponentInChildren<CheckTrafficPoint>();
-        }
     }
 
     protected virtual void LoadCarMoving()
