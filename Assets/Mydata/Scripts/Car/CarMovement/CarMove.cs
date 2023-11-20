@@ -95,11 +95,8 @@ public class CarMove : MyMonoBehavior
 
     protected virtual void Move()
     {
-        if (waypoints.Length == 0 && currentWaypointIndex == 0) { speed = 0; }
-        else
-        {
-            speed = 7.0f;
-            transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypointIndex].position, speed * Time.fixedDeltaTime);
-        }
+        if (waypoints.Length == 0) return;
+        transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypointIndex].position, speed * Time.fixedDeltaTime);
+        
     }
 }
