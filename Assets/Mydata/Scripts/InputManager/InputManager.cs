@@ -21,6 +21,7 @@ public class InputManager : MonoBehaviour
 
     protected virtual void TouchInput()
     {
+        // Android
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
@@ -35,15 +36,23 @@ public class InputManager : MonoBehaviour
                 StartCoroutine(ResetPos());
             }
         }
+
+        // Unity editor, PC
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector3 screenPos = Input.mousePosition;
+            worldPos = Camera.main.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, 50f));
+            StartCoroutine(ResetPos());
+        }
     }
 
     private IEnumerator ResetPos()
     {
-        yield return new WaitForSeconds(1f);
-        float xPosition = 0f;
-        float zPosition = 0f;
-
+        yield return new WaitForSeconds(0.1f);
+        float xPosition = 100f;
+        float zPosition = 100f;
         Vector3 screenPos = new Vector3(xPosition, zPosition, 50f);
         worldPos = Camera.main.ScreenToWorldPoint(screenPos);
     }
+
 }

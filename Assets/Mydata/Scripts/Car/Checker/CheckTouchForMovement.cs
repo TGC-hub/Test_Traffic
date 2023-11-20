@@ -13,13 +13,13 @@ public class CheckTouchForMovement : MyMonoBehavior
     {
         distance = HorizontalDistance(this.transform.position, InputManager.Instance.WorldPos);
         if (distance < disLimit) { isTouch = true;}
+        else { isTouch = false;}
     }
 
     protected float HorizontalDistance(Vector3 position1, Vector3 position2)
     {
         position1.y = 0;
         position2.y = 0;
-
         return Vector3.Distance(position1, position2);
     }
 
